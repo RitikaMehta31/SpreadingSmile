@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<style>
+
+.bg-img {
+  /* The image used */
+  background-image:linear-gradient(to bottom, rgba(30, 30, 30, 0.6 ) 0%, rgba(30, 30, 30, 0.6) 100%), url("{% static 'img/collage4.jpg' %}");
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 700px;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  }
+
+  .containerD {
+  width:50%;
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 29px;
+  background-image: linear-gradient(to bottom, rgba(122, 122, 122, 0.6 ) 0%, rgba(122, 122, 122, 0.6) 100%);
+  padding-top: 25px;
+  opacity:0.9;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.form-group label{
+  color: #22272b;
+}
+
+</style>
+
+<div class="bg-img">
+    <form method='POST' class="containerD">
+        <h2 class="text-uppercase text-center text-white font-weight-bold"></h2>
+        {% csrf_token %}
+        <div class="form-row mb-3">
+            <div class="form-group col-md-6">
+                {{ form.name|as_crispy_field }}
+            </div>
+            <div class="form-group  col-md-6">
+                {{ form.mobile|as_crispy_field }}
+            </div>
+            <div class="form-group  col-md-6">
+                {{ form.city|as_crispy_field }}
+            </div>
+            <div class="form-group  col-md-6">
+                {{ form.date|as_crispy_field}}
+            </div>
+         <div class="col-md-12">
+            {{ form.address|as_crispy_field }}
+        </div>
+      </div>
+        <div class="form-row mb-3">
+            <div class="form-group col-md-4 mb-0">
+                {{ form.categories|as_crispy_field }}
+            </div>
+        </div>
+        <button  class="btn btn-primary" type="submit" >Create</button>      
+        <script>
+            $(function () {
+            $("#id_date").datepicker({
+              format:'YYYY-MM-DD',
+              autoHide: true,
+               startDate:'g',
+                });
+            });
+        </script>        
+    </form>
+</div>
+{% endblock %}

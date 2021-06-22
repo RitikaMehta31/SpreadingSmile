@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style type="text/css">
+	.bg-img {
+  /* The image used */
+  background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0.9 ) 0%, rgba(0, 0, 0, 0.9) 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 700px;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  }
+
+
+</style>
+<div class="bg-img">
+	<div class="row justify-content-center">
+	<div class="col-md-10">
+	<h1 class="text-center text-white mt-5">{{ event.name }}</h1>
+
+	<h5 class="text-center text-muted mb-5">{{ event.date|date:'F jS Y' }}</h5>
+
+	<p class="text-white">{{ event.description|safe }}</p>
+	</div>
+	</div>
+</div>
+{% endblock %}

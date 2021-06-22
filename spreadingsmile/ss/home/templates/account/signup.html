@@ -1,0 +1,51 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<style>
+
+.bg-img {
+  /* The image used */
+  background-image:linear-gradient(to bottom, rgba(30, 30, 30, 0.6 ) 0%, rgba(30, 30, 30, 0.6) 100%), url("{% static 'img/collage2.jpg' %}");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 760px;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  }
+
+  .containerD {
+  width:30%;
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-image: linear-gradient(to bottom, rgba(122, 122, 122, 0.6 ) 0%, rgba(122, 122, 122, 0.6) 100%);
+  padding-top: 25px;
+  opacity:0.9;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+</style>
+<div class="bg-img">
+<div class=containerD>
+	<h1 class="text-uppercase text-white font-weight-bold">{% trans "Sign Up" %}</h1>
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">Sign In</a>{% endblocktrans %}</p>
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+  {{ form|crispy }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button class="btn btn-primary primaryAction" type="submit">{% trans "Sign Up" %} &raquo;</button>
+</form>
+</div>
+</div>
+{% endblock %}

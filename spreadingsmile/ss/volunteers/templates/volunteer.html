@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+
+.bg-img {
+  /* The image used */
+  background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0.9 ) 0%, rgba(0, 0, 0, 0.9) 100%);
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 700px;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  }
+
+  .containerD {
+  width:45%;
+  min-width: 350px;
+  margin: 0 auto;
+  padding: 29px;
+  background-image: linear-gradient(to bottom, rgba(122, 122, 122, 0.5 ) 0%, rgba(122, 122, 122, 0.5) 100%);
+  padding-top: 25px;
+  opacity:0.9;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.form-group label{
+  color: #22272b;
+}
+
+</style>
+
+<div class="bg-img">
+    <form method='POST' class="containerD">
+        <h2 class="text-uppercase text-center text-white font-weight-bold">Volunteer Form</h2>
+        {% csrf_token %}
+		 <div class="form-row mb-3">
+			<div class="col-md-6">
+				{{form.fullname|as_crispy_field}}
+			</div>
+			<div class="col-md-6">
+				{{form.mobile|as_crispy_field}}
+			</div>
+		</div>
+		<div class="form-row mb-3">
+			<div class="col-md-6">
+				{{form.q2|as_crispy_field}}
+			</div>
+			<div class="col-md-6">
+				{{form.q1|as_crispy_field}}
+			</div>		
+		</div>
+    {{form.image|as_crispy_field}}
+		{{form.q3|as_crispy_field}}
+
+	<button  class="btn btn-primary" type="submit" >Submit</button>
+</form>
+</div>
+{% endblock %}

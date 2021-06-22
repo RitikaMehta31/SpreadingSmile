@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static%}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<header class="masthead">
+    <div class="container">  
+        <div class="MobilePadding">
+            <div class="masthead-heading text-uppercase">Spreading Smiles</div>
+            <div class="masthead-subheading">A Little Help Can Help A Lot Of Lives</div>
+            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'donationform' %}">Donate Now</a>
+        </div>
+    </div>
+</header>
+
+<section class="page-section" id="objectives">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase" style="color: #fed136;">Mission</h2>
+            <h3 class="section-subheading text-muted"></h3>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-10 m-auto">
+                <p class="lead" >Our mission is to distribute clothes and such usable items which are no longer use of people at their home. At times of pandemic, the consequences have been bad for poor people economically. So providing them winter clothes, shoes can help them a lot. We are not asking for money but only the things which are not useful for you. Our volunteer will pick the things from your home or you can also join us to distribute whenever their is distribution drive and we will send the venue and time. You just have to provide the information what you can donate and when. You can also contact us through website and mail if you have any queries. </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section style="padding-bottom: 0.1rem;">
+    <h2 class="section-heading text-uppercase text-center" >Upcoming Event</h2>
+    <br>
+    <div class="col-md-4">
+      <img src="{% static 'img/poster.jpg' %}" class="d-block w-100" alt="...">
+  </div>
+</section>
+    
+  
+<section class="page-section bg-light" id="join">
+    <div class="">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+            {% include 'car.html' %}
+            {% if not volunteerReg %}
+            <h4 class="my-3">Be a Part of Our Team</h4>
+            <a class="btn btn-primary btn-l text-uppercase " href="{% url 'volunteerform' %}">Join Now</a>
+            {% endif %} 
+        </div>
+    </div>
+</section>
+        
+        
+{% endblock %}

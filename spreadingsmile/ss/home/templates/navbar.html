@@ -1,0 +1,67 @@
+{% load i18n %}
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{% url 'home' %}"><img width='120px' style="height:45px"src="{% static 'img/Logo.png' %}"/></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu 
+            <i class="fas fa-bars ml-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ml-auto">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#objectives">Mission</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#join">Team</a></li>
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Rewards: {{request.session.reward}}</a></li>
+
+                {% if admin%}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'volunteers' %}">Volunteers</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'add_events' %}">Add Event</a></li>
+                {% endif %}
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Events
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'upcomingevents' %}">Upcoming</a>
+                        <a class="dropdown-item" href="#">Past</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#exampleModal">Sign Out</a></li>
+                
+            {% else %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'account_signup' %}">Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'account_login' %}">Login</a></li>
+            {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="exampleModal" tabindex="-1000" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{% trans 'Are you sure you want to sign out?' %}</p>
+        <div style="float: right">
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">{% trans 'Sign Out' %}</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

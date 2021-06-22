@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+.bg-img {
+  /* The image used */
+  background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0.9 ) 0%, rgba(0, 0, 0, 0.9) 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 700px;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  }
+
+
+
+</style>
+
+<div class="bg-img">
+	<div class="container">
+    <h1 class="text-center text-white" style="padding-bottom: 1rem;">Upcoming Events</h1>
+    {% for event in events %}
+      <div class="row justify-content-center my-3">
+      <div class="col-md-12">
+        <a href="{% url 'detail' event.id %}">
+          <h2>{{ event.name }}</h2>
+        </a>
+        <h5 class="text-muted">{{event.date|date:'D, j M. Y'}}</h5>
+        <p class="text-white">{{ event.description|striptags|truncatechars:200 }}</p>
+        <a href="{% url 'detail' event.id %}" class="btn  btn-outline-secondary ">Read More</a>
+    </div>
+  </div>
+  <br>
+{% endfor %}
+	</div>
+</div>
+
+
+
+{% endblock %}
